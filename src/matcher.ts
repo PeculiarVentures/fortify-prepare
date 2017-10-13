@@ -14,16 +14,19 @@ export function matchFiles(dir: string, config: IJsonConfig) {
         matchFile = file.replace(cutRe, "");
         //#endregion
 
+        // NOTE Replace \ to /, otherwise globToRegExp ignore files
+        matchFile = matchFile.replace(/\\/g, "/");
+
         if (config.include.length) {
             ok = config.include.some((pattern) => {
-                const re = globToRegExp(path.normalize(pattern), { globstar: true, extended: true });
+                const re = globToRegExp(pattern, { globstar: true, extended: true });
                 return re.test(matchFile);
             });
         }
 
         if (ok && config.exclude.length) {
             ok = !config.exclude.some((pattern) => {
-                const re = globToRegExp(path.normalize(pattern), { globstar: true, extended: true });
+                const re = globToRegExp(pattern, { globstar: true, extended: true });
                 return re.test(matchFile);
             });
         }
