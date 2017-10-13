@@ -1,0 +1,29 @@
+{
+  "name": "fortify-prepare",
+  "version": "1.0.0",
+  "description": "",
+  "main": "out/index.js",
+  "bin": {
+    "fortify-prepare": "out/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "glob-to-regexp": "^0.3.0",
+    "json-parser": "^1.1.5",
+    "minimist": "^1.2.0",
+    "rimraf": "^2.6.2",
+    "tslib": "^1.8.0"
+  },
+  "devDependencies": {
+    "@types/minimist": "^1.2.0",
+    "@types/node": "^8.0.34",
+    "@types/rimraf": "^2.0.2"
+  }
+}
