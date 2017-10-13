@@ -1,6 +1,6 @@
 import * as fs from "fs";
-import * as path from "path";
 import globToRegExp = require("glob-to-regexp");
+import * as path from "path";
 
 export function matchFiles(dir: string, config: IJsonConfig) {
     const files = findAllFiles(dir);
@@ -16,22 +16,22 @@ export function matchFiles(dir: string, config: IJsonConfig) {
 
         if (config.include.length) {
             ok = config.include.some((pattern) => {
-                const re = globToRegExp(pattern, { globstar: true, extended: true });
+                const re = globToRegExp(path.normalize(pattern), { globstar: true, extended: true });
                 return re.test(matchFile);
             });
         }
 
         if (ok && config.exclude.length) {
             ok = !config.exclude.some((pattern) => {
-                const re = globToRegExp(pattern, { globstar: true, extended: true });
+                const re = globToRegExp(path.normalize(pattern), { globstar: true, extended: true });
                 return re.test(matchFile);
             });
         }
 
         res.push({
             file,
-            matchFile,
             include: ok,
+            matchFile,
         });
     }
 
