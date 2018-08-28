@@ -5,6 +5,8 @@ interface IMinimistArguments {
     help: boolean;
     debug: boolean;
     init: boolean;
+    input: string;
+    output: string;
 }
 
 interface IJsonConfig {

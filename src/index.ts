@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 
 import * as fs from "fs";
+import * as jsonParser from "json-parser";
 import * as minimist from "minimist";
 import * as path from "path";
-import globToRegExp = require("glob-to-regexp");
-import * as jsonParser from "json-parser";
 
 import { CommandClear } from "./cmd_clear";
 import { CommandHelp } from "./cmd_help";
@@ -20,6 +19,8 @@ async function Main(argv: string[]) {
             d: "debug",
             h: "help",
             i: "init",
+            in: "input",
+            out: "output",
         },
         default: {
             debug: false,
@@ -71,10 +72,16 @@ function readConfig(args: IMinimistArguments) {
     }
 
     // check output dir
+    if (args.output) {
+        config.outDir = args.output;
+    }
     if (!config.outDir) {
         throw new Error(`Cannot get required 'outDir' property from ${CONFIG_FILE} file`);
     }
     // check src dir
+    if (args.input) {
+        config.srcDir = args.input;
+    }
     if (!config.srcDir) {
         config.srcDir = "./";
     }
