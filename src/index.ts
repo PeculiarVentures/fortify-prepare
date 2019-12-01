@@ -2,7 +2,7 @@
 
 import * as fs from "fs";
 import * as jsonParser from "json-parser";
-import * as minimist from "minimist";
+import minimist from "minimist";
 import * as path from "path";
 
 import { CommandClear } from "./cmd_clear";
