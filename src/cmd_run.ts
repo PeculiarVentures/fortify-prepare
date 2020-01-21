@@ -14,11 +14,11 @@ export async function CommandRun(config: IJsonConfig) {
     }
 
     const files = matchFiles(srcDir, config);
-    const promises: Array<Promise<{ file: string, copied: boolean }>> = [];
+    const result: Array<{ file: string, copied: boolean }> = [];
     for (const item of files) {
         if (item.include) {
             // Copy files which must be included
-            promises.push(copyFile(item.file, srcDir, outDir)
+            result.push(await copyFile(item.file, srcDir, outDir)
                 .catch((err) => {
                     console.log(`Cannot copy file ${item}. ${err.message}`);
                     return false;
@@ -34,7 +34,7 @@ export async function CommandRun(config: IJsonConfig) {
                 }));
         }
     }
-    return Promise.all(promises);
+    return result;
 }
 
 /**
